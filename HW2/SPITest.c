@@ -14,12 +14,12 @@ int main ()
 	
 	//Set up buffer
 	unsigned char buf[100];
-	buf[0] = 0xff;
+	buf[0] = 0x01;
 	buf[1] = 0xff;
 
     //Setup SPI
     int setup;
-    setup = wiringPiSPISetup(CHANNEL, 8000000);
+    setup = wiringPiSPISetup(CHANNEL, 1000000);
     //wiringPiSetup ();
 
     //print result of setup
@@ -29,10 +29,10 @@ int main ()
     while(1)
     {
         //write a random buffer to the PI
-        wiringPiSPIDataRW(0, buf, 1);
-
+        wiringPiSPIDataRW(CHANNEL, buf, 100);
+		//wiringPiWrite(buff);
         //delay between writes
-        delay(100);
+        delay(2);
         
         //print a confirmation
         printf("writing data");

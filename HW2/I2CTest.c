@@ -17,8 +17,8 @@ int main ()
     //Write out data
     while(1)
     {
-        int result;
-        result = wiringPiI2CWriteReg8(fd, 0x40, 0xff);
+        //int result;
+        wiringPiI2CWrite(fd, 0xff);
 
         delay(100);
 
