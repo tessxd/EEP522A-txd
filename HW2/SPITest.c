@@ -6,14 +6,15 @@
 int main ()
 {
     //Set up chip select to CE1
-    const int CHANNEL = 1;
+    //const int CHANNEL = 1;
 
     //Setup SPI
-    int setup;
-    setup = wiringPiSPISetup(CHANNEL, 500000);
+    //int setup;
+    wiringPiSetup ();
+    //setup = wiringPiSPISetup(CHANNEL, 500000);
 
     //print result of setup
-    printf("%d", setup);
+    //printf("%d", setup);
 
     //Send SPI data in a loop
     while(1)
