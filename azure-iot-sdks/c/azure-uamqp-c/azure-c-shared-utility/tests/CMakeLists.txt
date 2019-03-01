@@ -1,0 +1,48 @@
+#Copyright (c) Microsoft. All rights reserved.
+#Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+#this is CMakeLists.txt for the folder tests of C shared utility
+add_subdirectory(agenttime_unittests)
+add_subdirectory(base64_unittests)
+add_subdirectory(buffer_unittests)
+if(${use_condition})
+    add_subdirectory(condition_unittests)
+endif()
+add_subdirectory(constbuffer_unittests)
+add_subdirectory(constmap_unittests)
+add_subdirectory(crtabstractions_unittests)
+add_subdirectory(doublylinkedlist_unittests)
+add_subdirectory(gballoc_unittests)
+add_subdirectory(gballoc_without_init_unittests)
+add_subdirectory(hmacsha256_unittests)
+if(${use_http})
+	add_subdirectory(httpapiex_unittests)
+	add_subdirectory(httpapiexsas_unittests)
+	add_subdirectory(httpheaders_unittests)
+endif()
+add_subdirectory(list_unittests)
+add_subdirectory(lock_unittests)
+add_subdirectory(map_unittests)
+add_subdirectory(refcount_unittests)
+add_subdirectory(sastoken_unittests)
+if(WIN32)
+	add_subdirectory(socketio_win32_unittests)
+    add_subdirectory(x509_schannel_unittests)
+else()
+	add_subdirectory(socketio_berkeley_unittests)
+endif()
+
+#normally, with proper include paths, the below tests can be run under windows too.
+#however, because of the setup involved, they are restricted to Linux
+if(${use_openssl})
+add_subdirectory(x509_openssl_unittests)
+endif()
+
+add_subdirectory(string_tokenizer_unittests)
+add_subdirectory(strings_unittests)
+add_subdirectory(tickcounter_unittests)
+add_subdirectory(uniqueid_unittests)
+add_subdirectory(urlencode_unittests)
+add_subdirectory(vector_unittests)
+add_subdirectory(xio_unittests)
+add_subdirectory(optionhandler_unittests)
