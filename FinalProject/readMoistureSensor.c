@@ -1,6 +1,6 @@
-include <stdio.h>
-include <stdlib.h>
-include <wiringPi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <wiringPi.h>
 
 int main (void)
 {
