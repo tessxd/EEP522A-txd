@@ -44,7 +44,7 @@ int main(void) {
 	//write setup
 	wiringPiI2CWrite(fd, SETUP | OSCILL);
 	//set blink 
-	wiringPiI2CWrite(fd, BLINK_OFF);
+	wiringPiI2CWrite(fd, BLINK_ON);
 	//set brightness to max (0-15)
 	wiringPiI2CWrite(fd, BRIGHT | 15);
 
