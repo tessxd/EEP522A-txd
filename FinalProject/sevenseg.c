@@ -48,7 +48,7 @@ int main(void) {
 	//set brightness to max (0-15)
 	wiringPiI2CWrite(fd, 0xEF);
 
-	printf("initialized display")
+	printf("initialized display");
 
 	while (1) {
 		//TODO: read in and save sensor data
@@ -76,10 +76,10 @@ int main(void) {
 		//write to display
 		for (int i = 0; i < 16; i++)
 		{
-			wiringPiI2CWrite(fd, buffer[i]);
+			wiringPiI2CWriteReg8(fd,i, buffer[i]);
 		}
-		printf("writing to display")
-		printf("\n")
+		printf("writing to display");
+		printf("\n");
 
 		//delay
 		delay(100);
