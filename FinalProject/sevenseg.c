@@ -37,6 +37,11 @@ int main(void) {
 	const unsigned int BRIGHT = 0xEF;
 	const unsigned int OSCILL = 0x01;  
 
+	//initialize gpio input
+    wiringPiSetup();
+    //set pin as input
+    pinMode(22, INPUT);
+
 	//initialize display 
 	int fd;
 	fd = wiringPiI2CSetup(ADDRESS);
@@ -48,35 +53,52 @@ int main(void) {
 	//set brightness to max (0-15)
 	wiringPiI2CWrite(fd, 0xEF);
 
-	printf("initialized display");
+	printf("initialized moisture sensor and display");
 
 	while (1) {
-		//TODO: read in and save sensor data
+    	//read in moisture sensor value
+    	int sensor_data = digitalRead(22);
+    	//print to console to ensure it's working
+    	printf("%d", sensor_data);
+		printf(" \n");
 
-		//clear display buffer
-		unsigned int buffer[16];  
+		//clear display buffers
+		unsigned int buffer_wet[16];  
 		for (int i = 0; i < 16; i++)
 		{
-			buffer[i] = 0x00;
+			buffer_wet[i] = 0x00;
 		} 
 
-		//set digit 0
-		buffer[0] = 0x06;
-		buffer[2] = 0x06;
-		buffer[6] = 0x06;
-		buffer[8] = 0x06;		
+		unsigned int buffer_dry[16];  
+		for (int i = 0; i < 16; i++)
+		{
+			buffer_dry[i] = 0x00;
+		}
 
-		//set digit 1 
+		//set digits to 1 for wet
+		buffer_wet[0] = 0x06;
+		buffer_wet[2] = 0x06;
+		buffer_wet[6] = 0x06;
+		buffer_wet[8] = 0x06;		
 
-		//set digit 2
-		//int offset = 1;
-
-		//set digit 3
+		//set digits to 0 for dry 
+		buffer_wet[0] = 0x63;
+		buffer_wet[2] = 0x63;
+		buffer_wet[6] = 0x63;
+		buffer_wet[8] = 0x63;	
 
 		//write to display
 		for (int i = 0; i < 16; i++)
 		{
-			wiringPiI2CWriteReg8(fd,i, buffer[i]);
+			if (sensor_data == 1)
+			{
+				wiringPiI2CWriteReg8(fd,i, buffer_wet[i]);
+			}
+			else if (sensor_data == 0)
+			{
+				wiringPiI2CWriteReg8(fd,i, buffer_dry[i]);
+			}
+			
 		}
 		printf("writing to display");
 		printf("\n");
