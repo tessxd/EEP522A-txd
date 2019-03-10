@@ -31,10 +31,10 @@ int main(void) {
     //chip specific constants
     const unsigned int ADDRESS = 0x70;       //i2c address
     const unsigned int BLINK_CMD = 0x80;     //blinking command
-    const unsigned int BLINK_ON = 0x01;
+    const unsigned int DISPLAY_ON = 0x01;
 	const unsigned int BLINK_OFF = 0x00;
     const unsigned int SETUP = 0x20;
-	const unsigned int BRIGHT = 0xE0;
+	const unsigned int BRIGHT = 0xEF;
 	const unsigned int OSCILL = 0x01;  
 
 	//initialize display 
@@ -44,9 +44,9 @@ int main(void) {
 	//write setup
 	wiringPiI2CWrite(fd, SETUP | OSCILL);
 	//set blink 
-	wiringPiI2CWrite(fd, BLINK_ON);
+	wiringPiI2CWrite(fd, BLINK_CMD | BLINK_OFF | DISPLAY_ON);
 	//set brightness to max (0-15)
-	wiringPiI2CWrite(fd, BRIGHT | 15);
+	wiringPiI2CWrite(fd, BRIGHT);
 
 
 	while (1) {
