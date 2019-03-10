@@ -42,13 +42,15 @@ int main(void) {
 	fd = wiringPiI2CSetup(ADDRESS);
 
 	//write setup
-	wiringPiI2CWrite(fd, SETUP | OSCILL);
+	wiringPiI2CWrite(fd, 0x21);
 	//set blink 
-	wiringPiI2CWrite(fd, BLINK_CMD | BLINK_OFF | DISPLAY_ON);
+	wiringPiI2CWrite(fd, 0x81);
 	//set brightness to max (0-15)
-	wiringPiI2CWrite(fd, BRIGHT);
+	wiringPiI2CWrite(fd, 0xEF);
 
+	printf("initialized display")
 
+	/*
 	while (1) {
 		//TODO: read in and save sensor data
 
@@ -70,10 +72,11 @@ int main(void) {
 		//set digit 3
 
 		//write to display
-		wiringPiI2CWrite(fd, buffer[0]);
+		wiringPiI2CWrite(fd, buffer);
 
 		//delay
 		delay(100);
+		*/
 	}
     
 }
