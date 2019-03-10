@@ -50,7 +50,6 @@ int main(void) {
 
 	printf("initialized display")
 
-	/*
 	while (1) {
 		//TODO: read in and save sensor data
 
@@ -62,7 +61,10 @@ int main(void) {
 		} 
 
 		//set digit 0
-		buffer[0] = one & 0xFF; 
+		buffer[0] = 0x06;
+		buffer[2] = 0x06;
+		buffer[6] = 0x06;
+		buffer[8] = 0x06;		
 
 		//set digit 1 
 
@@ -72,11 +74,15 @@ int main(void) {
 		//set digit 3
 
 		//write to display
-		wiringPiI2CWrite(fd, buffer);
+		for (int i = 0; i < 16; i++)
+		{
+			wiringPiI2CWrite(fd, buffer[i]);
+		}
+		printf("writing to display")
+		printf("\n")
 
 		//delay
 		delay(100);
-		*/
 	}
     
 }
