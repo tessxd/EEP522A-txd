@@ -12,4 +12,8 @@ int main (void)
     int value = digitalRead(22);
     //print to console to ensure it's working
     printf("%d", value);
+
+    //send to seven segment display
+
+
 }
