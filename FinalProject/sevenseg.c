@@ -8,10 +8,10 @@
 #include <time.h>
 
 const unsigned int  zero = 0x3F;  /* 0 */
-const uint8_t one = 0x06;   /* 1 */
-const uint8_t two = 0x5B;   /* 2 */
-const uint8_t three = 0x4F; /* 3 */
-const uint8_t four = 0x66;  /* 4 */
+const unsigned int one = 0x06;   /* 1 */
+const unsigned int two = 0x5B;   /* 2 */
+const unsigned int three = 0x4F; /* 3 */
+const unsigned int four = 0x66;  /* 4 */
 
 /*	
 	0x6D, /* 5 
@@ -29,13 +29,13 @@ const uint8_t four = 0x66;  /* 4 */
 
 int main(void) {
     //chip specific constants
-    const uint8_t ADDRESS = 0x70;       //i2c address
-    const uint8_t BLINK_CMD = 0x80;     //blinking command
-    const uint8_t BLINK_ON = 0x01;
-	const uint8_t BLINK_OFF = 0x00;
-    const uint8_t SETUP = 0x20;
-	const uint8_t BRIGHT = 0xE0;
-	const uint8_t OSCILL = 0x01;  
+    const unsigned int ADDRESS = 0x70;       //i2c address
+    const unsigned int BLINK_CMD = 0x80;     //blinking command
+    const unsigned int BLINK_ON = 0x01;
+	const unsigned int BLINK_OFF = 0x00;
+    const unsigned int SETUP = 0x20;
+	const unsigned int BRIGHT = 0xE0;
+	const unsigned int OSCILL = 0x01;  
 
 	//initialize display 
 	int fd;
@@ -49,14 +49,14 @@ int main(void) {
 	wiringPiI2CWrite(fd, BRIGHT | 15);
 
 
-	while (true) {
+	while (1) {
 		//TODO: read in and save sensor data
 
 		//clear display buffer
-		uint16_t buffer[16];  
+		unsigned int buffer[16];  
 		for (i = 0; i < 16; i++)
 		{
-			buffer[i] = 0;
+			buffer[i] = 0x00;
 		} 
 
 		//set digit 0
