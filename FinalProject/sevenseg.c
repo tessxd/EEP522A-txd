@@ -5,11 +5,9 @@
 
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
-
-#include "sevenseg.h"
 #include <time.h>
 
-const uint8_t zero = 0x3F;  /* 0 */
+const unsigned int  zero = 0x3F;  /* 0 */
 const uint8_t one = 0x06;   /* 1 */
 const uint8_t two = 0x5B;   /* 2 */
 const uint8_t three = 0x4F; /* 3 */
