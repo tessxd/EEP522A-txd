@@ -54,7 +54,7 @@ int main(void) {
 
 		//clear display buffer
 		unsigned int buffer[16];  
-		for (i = 0; i < 16; i++)
+		for (int i = 0; i < 16; i++)
 		{
 			buffer[i] = 0x00;
 		} 
@@ -73,7 +73,7 @@ int main(void) {
 		wiringPiI2CWrite(fd, buffer[0]);
 
 		//delay
-		time.sleep(0.25);
+		delay(100);
 	}
     
 }
