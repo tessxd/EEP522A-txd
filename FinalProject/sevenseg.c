@@ -82,10 +82,10 @@ int main(void) {
 		buffer_wet[8] = 0x06;		
 
 		//set digits to 0 for dry 
-		buffer_dry[0] = 0x63;
-		buffer_dry[2] = 0x63;
-		buffer_dry[6] = 0x63;
-		buffer_dry[8] = 0x63;	
+		buffer_dry[0] = 0x3F;
+		buffer_dry[2] = 0x3F;
+		buffer_dry[6] = 0x3F;
+		buffer_dry[8] = 0x3F;	
 
 		//write to display
 		for (int i = 0; i < 16; i++)
