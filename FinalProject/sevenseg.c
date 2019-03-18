@@ -8,24 +8,10 @@
 #include <time.h>
 
 const unsigned int  zero = 0x3F;  /* 0 */
-const unsigned int one = 0x06;   /* 1 */
-const unsigned int two = 0x5B;   /* 2 */
-const unsigned int three = 0x4F; /* 3 */
-const unsigned int four = 0x66;  /* 4 */
-
-/*	
-	0x6D, /* 5 
-	0x7D, /* 6 
-	0x07, /* 7 
-	0x7F, /* 8 
-	0x6F, /* 9 
-	0x77, /* a 
-	0x7C, /* b 
-	0x39, /* C 
-	0x5E, /* d 
-	0x79, /* E 
-	0x71, /* F 
-}; */
+const unsigned int one = 0x06;    /* 1 */
+const unsigned int two = 0x5B;    /* 2 */
+const unsigned int three = 0x4F;  /* 3 */
+const unsigned int four = 0x66;   /* 4 */
 
 int main(void) {
     //chip specific constants
@@ -37,28 +23,43 @@ int main(void) {
 	const unsigned int BRIGHT = 0xEF;
 	const unsigned int OSCILL = 0x01;  
 
+	//return code
+	int returnCode = 0;
+
 	//initialize gpio input
-    wiringPiSetup();
+    returnCode = wiringPiSetup();
+	assert(returnCode != 0);
+
     //set pin as input
     pinMode(22, INPUT);
 
 	//initialize display 
 	int fd;
 	fd = wiringPiI2CSetup(ADDRESS);
+	assert(fd == -1);
 
 	//write setup
-	wiringPiI2CWrite(fd, 0x21);
+	returnCode = wiringPiI2CWrite(fd, 0x21);
+	assert(returnCode < 0);
+
 	//set blink 
-	wiringPiI2CWrite(fd, 0x81);
+	returnCode = wiringPiI2CWrite(fd, 0x81);
+	assert(returnCode < 0);
+
 	//set brightness to max (0-15)
-	wiringPiI2CWrite(fd, 0xEF);
+	returnCode = wiringPiI2CWrite(fd, 0xEF);
+	assert(returnCode < 0);
 
 	printf("initialized moisture sensor and display");
 
 	while (1) {
     	//read in moisture sensor value
     	int sensor_data = digitalRead(22);
-    	//print to console to ensure it's working
+		//Check sensor_data is 0 or 1
+		assert(sensor_data < 0);
+		assert(sensor_data > 1);
+    	
+		//print to console to ensure it's working
     	printf("%d", sensor_data);
 		printf(" \n");
 
@@ -92,14 +93,17 @@ int main(void) {
 		{
 			if (sensor_data == 1)
 			{
-				wiringPiI2CWriteReg8(fd,i, buffer_wet[i]);
+				returnCode = wiringPiI2CWriteReg8(fd,i, buffer_wet[i]);
+				assert(returnCode < 0);
 			}
 			else if (sensor_data == 0)
 			{
-				wiringPiI2CWriteReg8(fd,i, buffer_dry[i]);
+				returnCode = wiringPiI2CWriteReg8(fd,i, buffer_dry[i]);
+				assert(returnCode < 0);
 			}
 			
 		}
+		
 		printf("writing to display");
 		printf("\n");
 
@@ -109,4 +113,3 @@ int main(void) {
     
 }
 
-///ADD ASSERT STATEMENTS YA GOON
